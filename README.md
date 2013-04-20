@@ -1,2 +1,2 @@
-Magnetodroid
+MagnetoMap
 ============
