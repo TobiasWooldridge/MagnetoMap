@@ -1,0 +1,21 @@
+body {
+	background: url(/images/earth.jpg);
+}
+
+h1, h2, h3 {
+	font-family: Tahoma, Arial, sans-serif;
+	font-weight: normal;
+}
+
+.container {
+	margin-top: 50px;
+	padding: 20px;
+	background: rgba(0,0,0,0.5);
+	color: #FFF;
+}
+
+#map-canvas {
+	margin: 0;
+	padding: 0;
+	height: 500px;
+}
