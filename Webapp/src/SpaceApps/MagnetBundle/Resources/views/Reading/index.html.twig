@@ -2,31 +2,34 @@
 
 {% block javascripts %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=visualization"></script>
 <script>
   var map;
 
   function initialize() {
     var mapOptions = {
-      zoom: 11,
+      zoom: 14,
       center: new google.maps.LatLng(-34.928727, 138.600769),
-      mapTypeId: google.maps.MapTypeId.TERRAIN
+      mapTypeId: google.maps.MapTypeId.SATELLITE
     };
 
     map = new google.maps.Map(document.getElementById('map-canvas'),
           mapOptions);
 
+    // Retrieve points for heatmap asyncronously
     $.ajax({
       url: '{{ path('spaceapps_magnet_reading_recent') }}',
       context: document.body
     }).done(function(result) {
       var heatmapData = [];
 
+      // Read JSON into gmaps heatmap-friendly format
       $.each(result.samples, function(index, sample) {
         var latLng = new google.maps.LatLng(sample.latitude, sample.longitude);
         heatmapData.push({ location: latLng, weight: sample.reading });
       });
 
+      // Draw the heatmap
       var heatmap = new google.maps.visualization.HeatmapLayer({
         data: heatmapData,
         map: map
@@ -38,18 +41,17 @@
 </script>
 {% endblock %}
 
-
-{% block stylesheets %}
-<style>
-	html, body, #map-canvas {
-		margin: 0;
-		padding: 0;
-		height: 100%;
-	}
-</style>
-{% endblock %}
-
-
 {% block body %}
-<div id="map-canvas"></div>
+<div class="container">
+  <h1 class="page-title">MagnetoMap</h1>
+  <p>MagnetoMap uses android handsets magnetometer to measure the value of the total magnetic force on the phone at the time of sampling. This data is used to create the heatmap below.</p>
+  <h2>About MagnetoMap</h2>
+  <p>Magnetomap leverages the magnetometer used in modern phones (which is typically used to provide compass functionality) to measure the total magnetic force being exerted on the phone<p> 
+  <p>This is useful for a number of reasons. Not only can this give us information about the strength of the Earth's magnetic field throughout the world, but we can also observe the effects of solar activity on the magnetic field experienced on the surface of the earth and changes in the earth's magnetic field.</p>
+  
+  <br />
+
+  <p>The following focuses on Adelaide by default, as it's the only location with real sensor data available.</p>
+  <div id="map-canvas"></div>
+</div>  
 {% endblock %}

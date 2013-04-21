@@ -38,7 +38,9 @@ class ReadingController extends Controller
         $samples = array();
 
         foreach ($sampleResult as $sample) {
-            $samples[] = (array)$sample;
+        	if ($sample['reading'] >= 25 && $sample['reading'] <= 65) {
+	            $samples[] = (array)$sample;
+	        }
         }
 
         $response = new Response();
@@ -82,5 +84,19 @@ class ReadingController extends Controller
 
     	return new Response();
     }
+
+    /**
+	 * @Route("/readings/metrics")
+     */
+    public function metricsAction()
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $sampleResult = $em
+                    ->createQuery('SELECT avg(s.reading) FROM SpaceAppsMagnetBundle:Sample s')
+                    ->execute();
+
+        return new Response(json_encode(array("average" => $sampleResult[0][1])));
+	}
 
 }
