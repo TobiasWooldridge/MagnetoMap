@@ -1,0 +1,35 @@
+Introduction
+The Magnetomap submission is a response to the latter Ardusat software challenges, which included writing an app to send magnetometer data from phones to a NASA database and 
+
+THE PLAN
+
+We can take magnetometer sensor data from phones and save it to an online database.
+From this not only can we make a map of the magnetic field strength on the earth, but we can apply this information and NASA's existing databases to observe the effects of solar event such as solar flares and solar storms.
+
+Ideally, the app would not only sample data from the magnetometer and send it to a web app, but it would allow the user to do a number of things with their magnometer.
+
+For example, when a spike in a regions magnetic field has been detected, we could display a notification to users, and possibly a reason why that spike has occured.
+
+Other functionality we'd like to implement includes a simple magnetic object finder (i.e. a metal detector) and 
+
+
+
+
+THE OUTCOME
+
+We implemented the app leverages the magnetometer used in modern phones (which is typically used to provide compass functionality) to measure the total magnetic force being exerted on the phone
+
+This is useful for a number of reasons. Not only can this give us information about the strength of the Earth's magnetic field throughout the world, but we can also observe the effects of solar activity on the magnetic field experienced on the surface of the earth and changes in the earth's magnetic field.
+
+
+
+THE ISSUES AND FUTURE	
+The single biggest problem when implementing our apps was magnetic interference. One of the problems with the magnetometer is, as you would expect, metal instruments nearby influence its readings. We need a sophisticated way to determine whether data is anomalous or not, and this is the single biggest enemy of our samples.
+
+A triaxial magnetometer's total field strength shouldn't change when it's rotated, however, we found this wasn't the case with our phones magnetometers when they were near interference. The reason this happened is not clear.
+
+This was a pain when making the app, but this could be leveraged in combination with the accelerometer to determine whether the readings are accurate, as we could use only readings that are consistent while the phone is being rotated.
+
+
+
+Outside of implmementing the accelerometer fanciness, another extension would be to use all sensors on a phone. Barometer, accelerometerer and magnetometer could be used to determine more events.
