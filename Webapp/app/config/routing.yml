@@ -1,0 +1,5 @@
+space_apps_magnet:
+    resource: "@SpaceAppsMagnetBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
